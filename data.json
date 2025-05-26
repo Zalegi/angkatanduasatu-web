@@ -1140,7 +1140,7 @@
   {
     "nama": "Rayan Zikri",
     "kelas": "9F",
-    "foto": "/IMAGE/rayan.jpeg",
+    "foto": "IMAGE/rayan.jpeg",
     "kutipan": "AIH DAH!! AKU TULAH!!!"
   },
   {
@@ -1164,7 +1164,7 @@
   {
     "nama": "Zalegi Revano",
     "kelas": "9F",
-    "foto": "/IMAGE/PROFIL/F/33.jpeg",
+    "foto": "IMAGE/PROFIL/F/33.jpeg",
     "kutipan": "Tak banyak omong. susah muat setue ini"
   }
 ]
