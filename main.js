@@ -1,3 +1,33 @@
+///GANTI BACKGROUND
+const images = [
+  'IMAGE/COLLAPSE/1.jpeg',
+  'IMAGE/COLLAPSE/2.jpeg',
+];
+
+let index = 0;
+let visible = true;
+
+const bg1 = document.getElementById('bg1');
+const bg2 = document.getElementById('bg2');
+
+bg1.style.backgroundImage = `url('${images[0]}')`;
+bg1.style.opacity = 1;
+bg2.style.opacity = 0;
+
+setInterval(() => {
+  index = (index + 1) % images.length;
+  const nextImage = images[index];
+  if (visible) {
+    bg2.style.backgroundImage = `url('${nextImage}')`;
+    bg2.style.opacity = 1;
+    bg1.style.opacity = 0;
+  } else {
+    bg1.style.backgroundImage = `url('${nextImage}')`;
+    bg1.style.opacity = 1;
+    bg2.style.opacity = 0;
+  }
+  visible = !visible;
+}, 6000);
 
 ///RENDER PROFIL SISWA
 let siswa = [];

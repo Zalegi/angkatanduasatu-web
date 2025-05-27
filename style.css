@@ -25,12 +25,36 @@ body, html {
 
 
 .hero {
+  position: relative;
   height: calc(100vh - 55px);
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('IMAGE/bg-background.jpeg') center center / cover no-repeat;
-  background-color: #000;
+  overflow: hidden;
   padding-bottom: 45px;
 }
+.hero-fade {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+.hero-fade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.hero-content {
+  position: relative; /* ini penting! */
+  z-index: 1; /* agar muncul di atas background */
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
 .hero a {
   color: white;
   text-decoration: none;
