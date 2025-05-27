@@ -8,15 +8,13 @@
   <link rel="icon" href="IMAGE/rayan.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-
     body {
       font-family: "Poppins", sans-serif;
       font-weight: 500;
       font-style: normal;
     }
-
     .hero {
       height: 100vh;
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -61,10 +59,9 @@
     <h2 class="text-center mb-4">Pembukaan</h2>
     <p class="text-center">Bismillahirahmanirahim</p>
     <p class="text-center">Assalamualaikum Warahmatullahi Wabarakatuh</p>
-    <p class="text-center">Segala puji dan syukur Kami panjatkan kehadirat Allah S.W.T. yang telah memberikan rahmat dan hidayah-Nya. Sehingga kami dapat menyelesaikan pengembangan website yang berjudul "Angkatan Dua Satu" dengan khidmat dan baik.</p>
-    <p class="text-center">Tidak lupa Kami ucapkan ribuan terima kasih kepada semua jajaran siswa/siswi alumni MTS Negeri 2 Banyuasin III angkatan ke-21 yang tidak dapat kami sebut namanya satu-persatu.</p>
-    <p class="text-center">Telah sampailah Kami pengembang dalam menyelesaikan pengembangan website ini yang semata-mata karena berkat rahmat Allah S.W.T, yang telah memberikan kemudahan dalam setiap langkah kami menuju cita-cita yang Kami pengembang harapkan. Disamping itu, masih banyak kesalahan dan kekurangan dalam pengembangan website ini. Kami pengembang mengharapkan saran dan juga kritik yang membangun.</p>
-    <p class="text-center">Akhir kata, kami berharap semoga pengembangan website ini membawa manfaat yang banyak bagi Kami pengembang, dan para pembacanya</p>
+    <p class="text-center">Segala puji dan syukur Kami panjatkan kehadirat Allah S.W.T. yang telah memberikan rahmat dan hidayah-Nya...</p>
+    <p class="text-center">Tidak lupa Kami ucapkan terima kasih kepada seluruh alumni angkatan ke-21...</p>
+    <p class="text-center">Kami menyadari masih banyak kekurangan, oleh karena itu saran dan kritik sangat kami harapkan...</p>
     <p class="text-center">Wassalamualaikum Warahmatullahi Wabarakatuh</p>
   </div>
 </section>
@@ -73,7 +70,7 @@
 <section class="py-5" id="visimisi">
   <div class="container pt-5 pb-5">
     <h2 class="text-center mb-4">Visi & Misi</h2>
-    <p class="text-center">Menjadi wadah yang solid, inspiratif, dan kontributif bagi seluruh alumni dalam membangun jaringan, meningkatkan kualitas diri, serta berperan aktif dalam kemajuan sekolah dan masyarakat.</p>
+    <p class="text-center">Menjadi wadah yang solid, inspiratif, dan kontributif bagi seluruh alumni...</p>
   </div>
 </section>
 
@@ -90,6 +87,7 @@
 <section class="py-5 bg-light" id="kelas">
   <div class="container pt-5 pb-5">
     <h2 class="text-center mb-4">Data Siswa per Kelas</h2>
+    <div id="loading" class="text-center py-3">Memuat data siswa...</div>
     <ul class="nav nav-tabs justify-content-center" id="tabKelas" role="tablist"></ul>
     <div class="tab-content p-3 border bg-white" id="tabContentKelas"></div>
   </div>
@@ -104,7 +102,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center">
-        <img id="fotoSiswa" src="" class="rounded-circle mb-3" width="150" height="150" />
+        <img id="fotoSiswa" src="" class="rounded-circle mb-3" width="150" height="150" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
         <h5 id="namaSiswa"></h5>
         <p id="kelasSiswa" class="text-muted"></p>
         <blockquote class="blockquote">
@@ -121,13 +119,10 @@
     <h2 class="text-center mb-4">Galeri Foto</h2>
     <div class="row g-3">
       <div class="col-md-4">
-        <img src="https://source.unsplash.com/600x400/?graduation" class="img-fluid rounded shadow-sm" alt="Galeri 1">
+        <img src="IMAGE/COLLAPSE/1.jpeg" class="img-fluid rounded shadow-sm" alt="Galeri 1">
       </div>
-      <div class="col-md-4">
-        <img src="https://source.unsplash.com/600x400/?school" class="img-fluid rounded shadow-sm" alt="Galeri 2">
-      </div>
-      <div class="col-md-4">
-        <img src="https://source.unsplash.com/600x400/?friends" class="img-fluid rounded shadow-sm" alt="Galeri 3">
+       <div class="col-md-4">
+        <img src="IMAGE/COLLAPSE/2.jpeg" class="img-fluid rounded shadow-sm" alt="Galeri 2">
       </div>
     </div>
   </div>
@@ -169,20 +164,19 @@
 <!-- Script untuk load siswa.json -->
 <script>
 let siswa = [];
-
 fetch('data.json')
   .then(res => res.json())
   .then(data => {
     siswa = data;
     renderTabs();
     initSearch();
+    document.getElementById("loading").style.display = "none";
   });
 
 function renderTabs() {
   const kelasUnik = [...new Set(siswa.map(s => s.kelas))].sort();
   const tabKelas = document.getElementById('tabKelas');
   const tabContent = document.getElementById('tabContentKelas');
-
   tabKelas.innerHTML = "";
   tabContent.innerHTML = "";
 
@@ -210,40 +204,41 @@ document.addEventListener('click', function (e) {
     e.preventDefault();
     const index = e.target.dataset.index;
     const s = siswa[index];
-
     document.getElementById("modalProfilLabel").textContent = `Profil: ${s.nama}`;
     document.getElementById("fotoSiswa").src = s.foto;
     document.getElementById("namaSiswa").textContent = s.nama;
     document.getElementById("kelasSiswa").textContent = `Kelas: ${s.kelas}`;
     document.getElementById("kutipanSiswa").textContent = s.kutipan;
-
-    const modal = new bootstrap.Modal(document.getElementById('modalProfil'));
-    modal.show();
+    new bootstrap.Modal(document.getElementById('modalProfil')).show();
   }
 });
 
 function initSearch() {
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
+  let timeout;
 
   searchInput.addEventListener("input", () => {
-    const keyword = searchInput.value.toLowerCase();
-    searchResults.innerHTML = "";
-
-    if (keyword.length > 0) {
-      siswa.forEach((s, index) => {
-        if (s.nama.toLowerCase().includes(keyword)) {
-          const item = document.createElement("li");
-          item.className = "list-group-item";
-          item.innerHTML = `<a href="#" class="profil-link" data-index="${index}">${s.nama} (${s.kelas})</a>`;
-          searchResults.appendChild(item);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      const keyword = searchInput.value.toLowerCase();
+      searchResults.innerHTML = "";
+      if (keyword.length > 0) {
+        let found = false;
+        siswa.forEach((s, index) => {
+          if (s.nama.toLowerCase().includes(keyword)) {
+            const item = document.createElement("li");
+            item.className = "list-group-item";
+            item.innerHTML = `<a href="#" class="profil-link" data-index="${index}">${s.nama} (${s.kelas})</a>`;
+            searchResults.appendChild(item);
+            found = true;
+          }
+        });
+        if (!found) {
+          searchResults.innerHTML = `<li class="list-group-item text-muted">Tidak ditemukan</li>`;
         }
-      });
-
-      if (searchResults.children.length === 0) {
-        searchResults.innerHTML = `<li class="list-group-item text-muted">Tidak ditemukan</li>`;
       }
-    }
+    }, 300);
   });
 }
 </script>
