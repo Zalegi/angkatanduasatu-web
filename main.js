@@ -1,3 +1,5 @@
+
+///RENDER PROFIL SISWA
 let siswa = [];
 fetch('data.json')
   .then(res => res.json())
@@ -50,6 +52,7 @@ document.addEventListener('click', function (e) {
   }
 });
 
+///PENCARIAN NAMA SISWA
 function initSearch() {
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
@@ -76,4 +79,39 @@ function initSearch() {
       }
     }, 300);
   });
+}
+
+
+///RENDER testimoni
+let testimonies = [];
+let testiIndex = 0;
+
+fetch('testimoni.json')
+  .then(res => res.json())
+  .then(data => {
+    testimonies = data;
+    if (testimonies.length > 0) {
+      tampilkanTestimoni();
+      setInterval(gantiTestimoni, 5000); // ganti setiap 5 detik
+    }
+  })
+  .catch(err => {
+    console.error("Gagal memuat testimoni:", err);
+    document.getElementById("pesanTesti").textContent = "Gagal memuat testimoni.";
+  });
+
+function tampilkanTestimoni() {
+  const t = testimonies[testiIndex];
+  document.getElementById("pesanTesti").textContent = `"${t.pesan}"`;
+  document.getElementById("footerTesti").textContent = `${t.nama}, ${t.kelas}`;
+}
+
+function gantiTestimoni() {
+  const el = document.getElementById("testimoni");
+  el.style.opacity = 0;
+  setTimeout(() => {
+    testiIndex = (testiIndex + 1) % testimonies.length;
+    tampilkanTestimoni();
+    el.style.opacity = 1;
+  }, 300);
 }

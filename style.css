@@ -31,6 +31,19 @@ body, html {
   background-color: #000;
   padding-bottom: 45px;
 }
+.hero a {
+  color: white;
+  text-decoration: none;
+  
+  padding: 6px;
+  border-radius: 10px;
+  border: 2px solid white;
+  transition: border-color 0.3s ease;
+}
+.hero a:hover {
+  color: #555;
+  border-color: #555;
+}
 
 .bg-custom {
   background-color: #A8D0E6;
@@ -44,7 +57,7 @@ body, html {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-  color: #000;
+  color: #fff;
 }
 
 .navbar.sticky-top {
@@ -80,6 +93,10 @@ body, html {
 
 .footer-menu a:hover {
   color: #00bcd4;
+}
+
+#testimoni {
+  transition: opacity 0.5s ease-in-out;
 }
 
 
