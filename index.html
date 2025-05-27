@@ -47,32 +47,38 @@
     }
 
 
+  /* Responsive sederhana: ubah jadi kolom saat kecil */
+  @media (max-width: 768px) {
+    #nav-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
 
   </style>
 </head>
 <body>
 
-<header>
-  <nav class="navbar navbar-expand-lg sticky-top bg-custom">
-    <div class="container">
-      <a class="navbar-brand" href="#">Angkatan Dua Satu</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#pembukaan">Pembukaan</a></li>
-          <li class="nav-item"><a class="nav-link" href="#visimisi">Visi Misi</a></li>
-          <li class="nav-item"><a class="nav-link" href="#kelas">Siswa</a></li>
-          <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
-          <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
-          <li class="nav-item"><a class="nav-link" href="#video">Video</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg sticky-top bg-custom">
+  <div class="container">
+    <a class="navbar-brand" href="#">Angkatan Dua Satu</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#pembukaan">Pembukaan</a></li>
+        <li class="nav-item"><a class="nav-link" href="#visimisi">Visi Misi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kelas">Siswa</a></li>
+        <li class="nav-item"><a class="nav-link" href="#galeri">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link" href="#video">Video</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-</header>
 
 <main>
 
