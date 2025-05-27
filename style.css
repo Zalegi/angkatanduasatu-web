@@ -1,10 +1,11 @@
-body {
+body, html {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
-}
-html {
   scroll-behavior: smooth;
+
+  margin: 0;
+  padding: 0;
 }
 
 .a-black {
@@ -24,10 +25,11 @@ html {
 
 
 .hero {
-  height: 100vh;
+  height: calc(100vh - 55px);
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
               url('IMAGE/bg-background.jpeg') center center / cover no-repeat;
   background-color: #000;
+  padding-bottom: 45px;
 }
 
 .bg-custom {
@@ -48,5 +50,37 @@ html {
 .navbar.sticky-top {
   z-index: 1030; /* supaya selalu di atas konten */
 }
+
+
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 25px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-top {
+  margin-bottom: 10px;
+}
+
+.footer-menu {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-size: 13px;
+}
+
+.footer-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.footer-menu a:hover {
+  color: #00bcd4;
+}
+
 
 
