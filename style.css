@@ -1,0 +1,52 @@
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.a-black {
+    color:black;
+    text-decoration:none;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.fSiswa {
+    height: 40px;
+    width:auto;
+    display: block;
+    border-radius: 50%;
+}
+
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('IMAGE/bg-background.jpeg') center center / cover no-repeat;
+  background-color: #000;
+}
+
+.bg-custom {
+  background-color: #A8D0E6;
+  color: #333;
+  /* jangan set position di sini */
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #000;
+}
+
+.navbar.sticky-top {
+  z-index: 1030; /* supaya selalu di atas konten */
+}
+
+

@@ -1,0 +1,79 @@
+let siswa = [];
+fetch('data.json')
+  .then(res => res.json())
+  .then(data => {
+    siswa = data;
+    renderTabs();
+    initSearch();
+    document.getElementById("loading").style.display = "none";
+  })
+  .catch(err => {
+    document.getElementById("loading").innerHTML = `<span class="text-danger">Gagal memuat data siswa.</span>`;
+    console.error("Fetch error:", err);
+  });
+
+function renderTabs() {
+  const kelasUnik = [...new Set(siswa.map(s => s.kelas))].sort();
+  const tabKelas = document.getElementById('tabKelas');
+  const tabContent = document.getElementById('tabContentKelas');
+  tabKelas.innerHTML = "";
+  tabContent.innerHTML = "";
+
+  kelasUnik.forEach((kelas, idx) => {
+    tabKelas.innerHTML += `
+      <li class="nav-item" role="presentation">
+        <button class="a-black nav-link ${idx === 0 ? 'active' : ''}" id="tab-${kelas}" data-bs-toggle="tab" data-bs-target="#konten-${kelas}" type="button">${kelas}</button>
+      </li>`;
+    const siswaKelas = siswa.filter(s => s.kelas === kelas);
+    let listItems = siswaKelas.map((s, i) => {
+      const index = siswa.indexOf(s);
+      return `<li class="list-group-item"><a href="#" class="a-black profil-link" data-index="${index}"><img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">${s.nama}</a></li>`;
+    }).join("");
+    tabContent.innerHTML += `
+      <div class="tab-pane fade ${idx === 0 ? 'show active' : ''}" id="konten-${kelas}">
+        <ul class="list-group">${listItems}</ul>
+      </div>`;
+  });
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('profil-link')) {
+    e.preventDefault();
+    const index = e.target.dataset.index;
+    const s = siswa[index];
+    document.getElementById("modalProfilLabel").textContent = `Profil: ${s.nama}`;
+    document.getElementById("fotoSiswa").src = s.foto;
+    document.getElementById("namaSiswa").textContent = s.nama;
+    document.getElementById("kelasSiswa").textContent = `Kelas: ${s.kelas}`;
+    document.getElementById("kutipanSiswa").textContent = s.kutipan;
+    new bootstrap.Modal(document.getElementById('modalProfil')).show();
+  }
+});
+
+function initSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+  let timeout;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      const keyword = searchInput.value.toLowerCase();
+      searchResults.innerHTML = "";
+      if (keyword.length > 0) {
+        let found = false;
+        siswa.forEach((s, index) => {
+          if (s.nama.toLowerCase().includes(keyword)) {
+            const item = document.createElement("li");
+            item.className = "list-group-item";
+            item.innerHTML = `<a href="#" class="a-black profil-link" data-index="${index}"><img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">${s.nama} (${s.kelas})</a>`;
+            searchResults.appendChild(item);
+            found = true;
+          }
+        });
+        if (!found) {
+          searchResults.innerHTML = `<li class="list-group-item text-muted">Tidak ditemukan</li>`;
+        }
+      }
+    }, 300);
+  });
+}
