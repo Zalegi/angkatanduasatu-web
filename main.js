@@ -68,19 +68,6 @@ function renderTabKelas() {
   });
 }
 
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('profil-link')) {
-    e.preventDefault();
-    const index = e.target.dataset.index;
-    const s = siswa[index];
-    document.getElementById("modalProfilLabel").textContent = `Profil: ${s.nama}`;
-    document.getElementById("fotoSiswa").src = s.foto;
-    document.getElementById("namaSiswa").textContent = s.nama;
-    document.getElementById("kelasSiswa").textContent = `Kelas: ${s.kelas}`;
-    document.getElementById("kutipanSiswa").textContent = s.kutipan;
-    new bootstrap.Modal(document.getElementById('modalProfil')).show();
-  }
-});
 
 ///PENCARIAN NAMA SISWA
 function initSearch() {
@@ -170,11 +157,13 @@ function renderTabGaleri() {
       </li>`;
 
     const fotoKelas = galeri.filter(g => g.kelas === kelas);
-    let fotoHTML = fotoKelas.map(f => `
-      <div class="col-sm-6 col-md-3">
-        <img src="${f.foto}" class="img-fluid galeri-img" alt="Foto Galeri" onerror="this.src='IMAGE/COLLAPSE/default.jpg'">
-      </div>
-    `).join("");
+    let fotoHTML = fotoKelas.map((f, i) => {
+      const index = galeri.indexOf(f);
+      return `
+        <div class="col-sm-6 col-md-3">
+          <img src="${f.foto}" data-index="${index}" class="foto-galeri img-fluid galeri-img" alt="Foto Galeri" onerror="this.src='IMAGE/COLLAPSE/default.jpg'">
+        </div>
+    `}).join("");
 
     tabKonten.innerHTML += `
       <div class="tab-pane fade ${idx === 0 ? 'show active' : ''}" id="galeri-${kelas}">
@@ -184,3 +173,25 @@ function renderTabGaleri() {
       </div>`;
   });
 }
+
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('profil-link')) {
+    e.preventDefault();
+    const index = e.target.dataset.index;
+    const s = siswa[index];
+    document.getElementById("modalProfilLabel").textContent = `Profil: ${s.nama}`;
+    document.getElementById("fotoSiswa").src = s.foto;
+    document.getElementById("namaSiswa").textContent = s.nama;
+    document.getElementById("kelasSiswa").textContent = `Kelas: ${s.kelas}`;
+    document.getElementById("kutipanSiswa").textContent = s.kutipan;
+    new bootstrap.Modal(document.getElementById('modalProfil')).show();
+  }
+  else if(e.target.classList.contains('foto-galeri')) {
+    e.preventDefault();
+    const index = e.target.dataset.index;
+    const f = galeri[index];
+    document.getElementById("fotoGaleri").src = f.foto;
+    new bootstrap.Modal(document.getElementById('modalGaleri')).show();
+  }
+});
