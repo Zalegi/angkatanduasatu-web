@@ -56,17 +56,30 @@ function renderTabKelas() {
       <li class="nav-item" role="presentation">
         <button class="a-black nav-link ${idx === 0 ? 'active' : ''}" id="tab-${kelas}" data-bs-toggle="tab" data-bs-target="#konten-${kelas}" type="button">${kelas}</button>
       </li>`;
+
     const siswaKelas = siswa.filter(s => s.kelas === kelas);
     let listItems = siswaKelas.map((s, i) => {
       const index = siswa.indexOf(s);
-      return `<li class="list-group-item"><a href="#" class="a-black profil-link" data-index="${index}"><img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">${s.nama}</a></li>`;
+      return `
+        <div class="col-md-6">
+          <li class="list-group-item">
+            <a href="#" class="a-black profil-link" data-index="${index}">
+              <img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
+              ${s.nama}
+            </a>
+          </li>
+        </div>`;
     }).join("");
+
     tabContent.innerHTML += `
       <div class="tab-pane fade ${idx === 0 ? 'show active' : ''}" id="konten-${kelas}">
-        <ul class="list-group">${listItems}</ul>
+        <div class="row g-2">
+          ${listItems}
+        </div>
       </div>`;
   });
 }
+
 
 
 ///PENCARIAN NAMA SISWA
@@ -79,19 +92,31 @@ function initSearch() {
     timeout = setTimeout(() => {
       const keyword = searchInput.value.toLowerCase();
       searchResults.innerHTML = "";
+
       if (keyword.length > 0) {
         let found = false;
+        searchResults.innerHTML = `<div class="row g-2"></div>`;
+        const row = searchResults.querySelector(".row");
+
         siswa.forEach((s, index) => {
           if (s.nama.toLowerCase().includes(keyword)) {
+            const col = document.createElement("div");
+            col.className = "col-md-6";
             const item = document.createElement("li");
             item.className = "list-group-item";
-            item.innerHTML = `<a href="#" class="a-black profil-link" data-index="${index}"><img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">${s.nama} (${s.kelas})</a>`;
-            searchResults.appendChild(item);
+            item.innerHTML = `
+              <a href="#" class="a-black profil-link" data-index="${index}">
+                <img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
+                ${s.nama} (${s.kelas})
+              </a>`;
+            col.appendChild(item);
+            row.appendChild(col);
             found = true;
           }
         });
+
         if (!found) {
-          searchResults.innerHTML = `<li class="list-group-item text-muted">Tidak ditemukan</li>`;
+          row.innerHTML = `<div class="col-12"><li class="list-group-item text-muted">Tidak ditemukan</li></div>`;
         }
       }
     }, 300);
