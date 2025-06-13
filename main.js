@@ -58,11 +58,11 @@ function renderTabKelas() {
       </li>`;
 
     const siswaKelas = siswa.filter(s => s.kelas === kelas);
-    let listItems = siswaKelas.map((s, i) => {
+    let listItems = siswaKelas.map(s => {
       const index = siswa.indexOf(s);
       return `
         <div class="col-md-6">
-          <li class="list-group-item">
+          <li class="list-group-item rounded-3 shadow-sm mb-2">
             <a href="#" class="a-black profil-link" data-index="${index}">
               <img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
               ${s.nama}
@@ -79,7 +79,6 @@ function renderTabKelas() {
       </div>`;
   });
 }
-
 
 
 ///PENCARIAN NAMA SISWA
@@ -103,7 +102,7 @@ function initSearch() {
             const col = document.createElement("div");
             col.className = "col-md-6";
             const item = document.createElement("li");
-            item.className = "list-group-item";
+            item.className = "list-group-item rounded-3 shadow-sm mb-2";
             item.innerHTML = `
               <a href="#" class="a-black profil-link" data-index="${index}">
                 <img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
@@ -116,7 +115,7 @@ function initSearch() {
         });
 
         if (!found) {
-          row.innerHTML = `<div class="col-12"><li class="list-group-item text-muted">Tidak ditemukan</li></div>`;
+          row.innerHTML = `<div class="col-12"><li class="list-group-item text-muted rounded-3 shadow-sm mb-2">Tidak ditemukan</li></div>`;
         }
       }
     }, 300);
