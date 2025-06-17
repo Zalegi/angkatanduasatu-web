@@ -62,7 +62,7 @@ function renderTabKelas() {
       const index = siswa.indexOf(s);
       return `
         <div class="col-md-6">
-          <li class="list-group-item rounded-3 shadow-sm mb-2">
+          <li style="padding-left:10px;" class="list-group-item rounded-3 shadow-sm mb-2">
             <a href="#" class="a-black profil-link" data-index="${index}">
               <img src="${s.foto}" class="fSiswa" alt="Foto Siswa" onerror="this.src='IMAGE/PROFIL/default.jpeg'">
               ${s.nama}
