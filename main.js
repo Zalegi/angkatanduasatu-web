@@ -133,12 +133,12 @@ function resizeAllSiswaImage() {
     if (img.dataset.resized) return; // Cegah resize ulang
 
     img.onload = function () {
-      if (img.naturalWidth <= 540) return; // Tidak perlu resize kalau gambar kecil
+      if (img.naturalWidth <= 256) return; // Tidak perlu resize kalau gambar kecil
 
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      const scale = 540 / img.naturalWidth;
-      canvas.width = 540;
+      const scale = 256 / img.naturalWidth;
+      canvas.width = 256;
       canvas.height = img.naturalHeight * scale;
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
