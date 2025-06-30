@@ -78,14 +78,16 @@ function renderTabKelas() {
         </div>
       </div>`;
   });
+
+  // Resize gambar setelah render selesai
+  setTimeout(resizeAllSiswaImage, 0);
 }
 
-
-///PENCARIAN NAMA SISWA
 function initSearch() {
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
   let timeout;
+
   searchInput.addEventListener("input", () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
@@ -117,8 +119,36 @@ function initSearch() {
         if (!found) {
           row.innerHTML = `<div class="col-12"><li class="list-group-item text-muted rounded-3 shadow-sm mb-2">Tidak ditemukan</li></div>`;
         }
+
+        // Resize gambar hasil pencarian
+        setTimeout(resizeAllSiswaImage, 0);
       }
     }, 300);
+  });
+}
+
+function resizeAllSiswaImage() {
+  const imgs = document.querySelectorAll(".fSiswa");
+  imgs.forEach(img => {
+    if (img.dataset.resized) return; // Cegah resize ulang
+
+    img.onload = function () {
+      if (img.naturalWidth <= 540) return; // Tidak perlu resize kalau gambar kecil
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const scale = 540 / img.naturalWidth;
+      canvas.width = 540;
+      canvas.height = img.naturalHeight * scale;
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      img.src = canvas.toDataURL("image/jpeg");
+      img.dataset.resized = "true";
+    };
+
+    // Kalau gambar sudah selesai load sebelumnya
+    if (img.complete) img.onload();
   });
 }
 
